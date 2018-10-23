@@ -1,0 +1,154 @@
+.address-select {
+  position: relative;
+  height: 32px;
+  width: 100%;
+}
+
+.address-select .dropdown-parent {
+  position: absolute;
+  top: calc(50% - 12px);
+  height: 32px;
+  width: 100%;
+}
+
+.address-select .dropdown-parent > div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.address-select .dropdown-parent .dropdown {
+  top: 32px !important;
+  width: 100%;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.address-select .dropup-parent {
+  position: absolute;
+  top: 0;
+  height: 32px;
+  width: 100%;
+}
+
+.address-select .dropup-parent > div {
+  position: absolute;
+  top: auto;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  bottom: 32px;
+}
+
+.address-select .dropup-parent .dropdown {
+  top: auto !important;
+  bottom: 0px !important;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.address-select .dropdwon-placement {
+  position: absolute;
+  z-index: 1000;
+  color: rgba(0,0,0,.65);
+}
+
+.address-select .dropdwon-placement > ul { 
+  position: relative;
+  margin: 0;
+  padding: 4px 0;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.address-select .dropdwon-placement > ul > li{ 
+  padding: 5px 12px;
+  margin: 0;
+  color: #333;
+  clear: both;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  line-height: 18px;
+  background-color: #fff;
+}
+
+.address-select .dropdwon-placement > ul > li:hover {
+  background-color: #e6f7ff;
+}
+
+.address-select .auto-active-option-li {
+  background-color: #e6f7ff !important;
+}
+
+.address-select .auto-input {
+  width: 100%;
+  height: 100%;
+}
+
+.address-select .input-con {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.address-select .rc-input {
+  position: static;
+  padding: 4px 11px;
+  padding-right: 30px;
+  min-height: 100%;
+  display: inline-block;
+  height: 32px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  transition: all .3s;
+}
+
+.address-select .rc-input:hover {
+  border-color: #40a9ff;
+  border-right-width: 1px !important;
+}
+
+.address-select .rc-input:focus {
+  border-color: #40a9ff;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+  border-right-width: 1px !important;
+}
+
+.address-select .input-suffix {
+  right: 12px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  line-height: 0;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.address-select .close-i {
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+  font-size: 12px;
+  display: inline-block;
+  font-style: normal;
+  vertical-align: -0.125em;
+  text-align: center;
+  text-transform: none;
+  line-height: 0;
+}
