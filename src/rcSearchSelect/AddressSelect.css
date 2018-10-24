@@ -94,6 +94,13 @@
   height: 100%;
 }
 
+.address-select input::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+.address-select input::-moz-placeholder {
+  color: #bfbfbf;
+}
+
 .address-select .input-con {
   position: relative;
   display: inline-block;

@@ -179,6 +179,10 @@ class AddressSelect extends React.Component {
       if (this.state.pointIndex) {// 选择值
         const node = document.getElementById('auto-option-li-' + this.state.pointIndex)
         const key = node.getAttribute('data-key')
+        if (!keyField || !(keyField in (dataList[0] || Object))) {
+          console.warn('There is no such attribute '+ keyField +' in the object. Press the Enter key selected option failed!')
+          return
+        }
         let obj = null
         dataList.map(item => {
           if (item && key == item[keyField]) {
@@ -224,12 +228,13 @@ class AddressSelect extends React.Component {
     const { labelField, keyField } = this.state
     if (data.length) {
       let invalid = false
-      if (!(labelField in data[0])) {
-        console.warn('There is no such attribute '+ labelField +' in the object.')
+      const obj = data[0]
+      if (typeof obj != 'object') {
+        console.warn('The item of dataSource must be objects.')
         invalid = true
       }
-      if (!(keyField in data[0])) {
-        console.warn('There is no such attribute '+ keyField +' in the object.')
+      if (!(labelField in obj)) {
+        console.warn('There is no such attribute '+ labelField +' in the object.')
         invalid = true
       }
       if (invalid) {
