@@ -1,4 +1,6 @@
 # rc-searchselect
+This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations.
+
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1024.gif)
 # install

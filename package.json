@@ -1,6 +1,6 @@
 {
   "name": "rc-searchselect",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/ctq123/rcSearchSelect.git"
   },
-  "keywords": ["rc-searchselect", "searchselect", "search", "select", "address-select"],
+  "keywords": ["rc-searchselect", "searchselect", "search", "select", "React", "object"],
   "author": "",
   "license": "ISC",
   "bugs": {
