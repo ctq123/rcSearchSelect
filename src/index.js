@@ -1,1 +1,1 @@
-export {default as SearchSelect} from './rcSearchSelect/AddressSelect'
+export {default as SearchSelect} from './rcSearchSelect/SearchSelect'

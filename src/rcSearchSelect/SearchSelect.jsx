@@ -1,10 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ClickOut from './ClickOut'
-import './AddressSelect.css'
+import './SearchSelect.css'
 
-// author: tqcheng
-class AddressSelect extends React.Component {
+/**
+ * platform: github
+ * author: ctq123
+ * date: 2018-10-22
+ */
+class SearchSelect extends React.Component {
   constructor(props) {
     super(props)
     const defaultDirection = props.direction ? props.direction : 'down'
@@ -64,7 +68,6 @@ class AddressSelect extends React.Component {
           pointIndex: 0,
         }
       })
-      this.state.onSelectCB(null)
     } else {
       const { dataList, isSelected } = this.state
       if (dataList && dataList.length) {
@@ -213,8 +216,6 @@ class AddressSelect extends React.Component {
     let parentEle = blockEle ? (blockEle.parentNode || blockEle.parentElement) : undefined
     parentEle = parentEle ? (parentEle.parentNode || parentEle.parentElement) : undefined
     if (blockEle && parentEle) {
-      // console.log("parentEle.scrollTop>>>", parentEle.scrollTop)
-      // console.log("blockEle.offsetTop>>>", blockEle.offsetTop)
       if (blockEle.offsetTop - parentEle.scrollTop > 68) {
         parentEle.scrollTop = (blockEle.offsetTop - 68)
       } else if (parentEle.scrollTop > blockEle.offsetTop) {
@@ -253,7 +254,7 @@ class AddressSelect extends React.Component {
     const { direction, dataList, inputVal, placeholder } = this.state
     return (
       <ClickOut onClickOut={this.onBlur.bind(this)}>
-        <div className='address-select'>
+        <div className='rc-searchselect'>
           <div>
             <div className={direction === 'up' ? 'dropup-parent' : 'dropdown-parent'}>
               <div>
@@ -298,7 +299,7 @@ class AddressSelect extends React.Component {
   }
 }
 
-AddressSelect.propTypes = {
+SearchSelect.propTypes = {
   dataSource: PropTypes.array,
   defaultValue: PropTypes.object,
   setValueObj: PropTypes.object,
@@ -310,4 +311,4 @@ AddressSelect.propTypes = {
   labelField: PropTypes.string,
 }
 
-export default AddressSelect
+export default SearchSelect

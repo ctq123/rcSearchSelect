@@ -1,17 +1,17 @@
-.address-select {
+.rc-searchselect {
   position: relative;
   height: 32px;
   width: 100%;
 }
 
-.address-select .dropdown-parent {
+.rc-searchselect .dropdown-parent {
   position: absolute;
   top: calc(50% - 12px);
   height: 32px;
   width: 100%;
 }
 
-.address-select .dropdown-parent > div {
+.rc-searchselect .dropdown-parent > div {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -19,7 +19,7 @@
   height: 100%;
 }
 
-.address-select .dropdown-parent .dropdown {
+.rc-searchselect .dropdown-parent .dropdown {
   top: 32px !important;
   width: 100%;
   border: 1px solid #ccc;
@@ -27,14 +27,14 @@
   overflow-y: auto;
 }
 
-.address-select .dropup-parent {
+.rc-searchselect .dropup-parent {
   position: absolute;
   top: 0;
   height: 32px;
   width: 100%;
 }
 
-.address-select .dropup-parent > div {
+.rc-searchselect .dropup-parent > div {
   position: absolute;
   top: auto;
   left: 0px;
@@ -43,7 +43,7 @@
   bottom: 32px;
 }
 
-.address-select .dropup-parent .dropdown {
+.rc-searchselect .dropup-parent .dropdown {
   top: auto !important;
   bottom: 0px !important;
   border: 1px solid #ccc;
@@ -52,13 +52,13 @@
   overflow-y: auto;
 }
 
-.address-select .dropdwon-placement {
+.rc-searchselect .dropdwon-placement {
   position: absolute;
   z-index: 1000;
   color: rgba(0,0,0,.65);
 }
 
-.address-select .dropdwon-placement > ul { 
+.rc-searchselect .dropdwon-placement > ul { 
   position: relative;
   margin: 0;
   padding: 4px 0;
@@ -66,7 +66,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,.15);
 }
 
-.address-select .dropdwon-placement > ul > li{ 
+.rc-searchselect .dropdwon-placement > ul > li{ 
   padding: 5px 12px;
   margin: 0;
   color: #333;
@@ -81,34 +81,34 @@
   background-color: #fff;
 }
 
-.address-select .dropdwon-placement > ul > li:hover {
+.rc-searchselect .dropdwon-placement > ul > li:hover {
   background-color: #e6f7ff;
 }
 
-.address-select .auto-active-option-li {
+.rc-searchselect .auto-active-option-li {
   background-color: #e6f7ff !important;
 }
 
-.address-select .auto-input {
+.rc-searchselect .auto-input {
   width: 100%;
   height: 100%;
 }
 
-.address-select input::-webkit-input-placeholder {
+.rc-searchselect input::-webkit-input-placeholder {
   color: #bfbfbf;
 }
-.address-select input::-moz-placeholder {
+.rc-searchselect input::-moz-placeholder {
   color: #bfbfbf;
 }
 
-.address-select .input-con {
+.rc-searchselect .input-con {
   position: relative;
   display: inline-block;
   width: 100%;
   line-height: 1.5;
 }
 
-.address-select .rc-input {
+.rc-searchselect .rc-input {
   position: static;
   padding: 4px 11px;
   padding-right: 30px;
@@ -125,12 +125,12 @@
   transition: all .3s;
 }
 
-.address-select .rc-input:hover {
+.rc-searchselect .rc-input:hover {
   border-color: #40a9ff;
   border-right-width: 1px !important;
 }
 
-.address-select .rc-input:focus {
+.rc-searchselect .rc-input:focus {
   border-color: #40a9ff;
   outline: 0;
   -webkit-box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
@@ -138,7 +138,7 @@
   border-right-width: 1px !important;
 }
 
-.address-select .input-suffix {
+.rc-searchselect .input-suffix {
   right: 12px;
   position: absolute;
   top: 50%;
@@ -147,7 +147,7 @@
   color: rgba(0, 0, 0, 0.65);
 }
 
-.address-select .close-i {
+.rc-searchselect .close-i {
   cursor: pointer;
   color: #ccc;
   transition: color 0.3s;

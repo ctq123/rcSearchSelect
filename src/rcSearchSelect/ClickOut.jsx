@@ -1,7 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-// author: 陈晓波
+/**
+ * platform: github
+ * author: xbchencn
+ * date: 2018-07-11
+ */
 class ClickOutComponent extends React.Component {
   componentDidMount () {
     let self = this
