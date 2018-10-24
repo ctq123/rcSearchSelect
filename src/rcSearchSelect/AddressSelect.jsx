@@ -11,7 +11,9 @@ class AddressSelect extends React.Component {
     const defaultPlaceholder = props.placeholder ? props.placeholder : ''
     const defaultOnChangeCB = props.onChange ? props.onChange : (e) => { }
     const defaultOnSelectCB = props.onSelect ? props.onSelect : (e) => { }
-    const defaultValue = props.defaultValue && props.defaultValue.label || ''
+    const defaultKey = props.keyField || ''
+    const defaultLabel = props.labelField || ''
+    const defaultValue = props.defaultValue && props.defaultValue[defaultLabel] || ''
 
     this.state = {
       dataList: [],
@@ -22,6 +24,8 @@ class AddressSelect extends React.Component {
       onChangeCB: defaultOnChangeCB,
       onSelectCB: defaultOnSelectCB,
       placeholder: defaultPlaceholder,
+      keyField: defaultKey,
+      labelField: defaultLabel
     }
   }
 
@@ -29,8 +33,8 @@ class AddressSelect extends React.Component {
     const { setValueObj } = nextProps
     if (setValueObj && setValueObj.id && setValueObj.id !== this.setID) {
       this.setID = setValueObj.id
-      if (setValueObj.data) {
-        let dataList = this.filterData(setValueObj.data)
+      if (setValueObj.label) {
+        let dataList = this.filterData(setValueObj.label)
         if (dataList && dataList.length) {
           this.selectOptionVal(dataList[0])
         }
@@ -113,13 +117,17 @@ class AddressSelect extends React.Component {
   }
 
   onOptionClick(item) {
-    // console.log('onOptionClick>>', item)
     this.selectOptionVal(item)
   }
 
-  selectOptionVal(item) {
+  selectOptionVal(item=null) {
+    const { labelField } = this.state
+    if (item && !(labelField in item)) {
+      console.warn('There is no such attribute '+ labelField +' in the object. Selected option failed!')
+      return
+    }
     this.state.onSelectCB(item)
-    const val = item && item.label || ''
+    const val = item && item[labelField] || ''
     this.setState((prevState, props) => {
       return {
         inputVal: val,
@@ -133,9 +141,14 @@ class AddressSelect extends React.Component {
   filterData(val) {
     const dataSource = this.props.dataSource || []
     let dataList = []
+    const { labelField } = this.state
+    if (dataSource.length && !(labelField in dataSource[0])) {
+      console.warn('There is no such attribute '+ labelField +' in the object.')
+      return
+    }
     dataSource.map(item => {
-      const label = item && item.label || ''
-      if (label.indexOf(val) > -1) {
+      const label = item && item[labelField] || ''
+      if (label.toString().indexOf(val) > -1) {
         dataList.push(item)
       }
     })
@@ -146,7 +159,7 @@ class AddressSelect extends React.Component {
     // console.log("handleKeyEvent", e)
     const keynum = e.keyCode || e.which
     // console.log("keynum", keynum)
-    const { dataList, inputVal } = this.state
+    const { dataList, inputVal, keyField } = this.state
     const isValidIndex = !!(dataList && dataList.length)
     if (keynum === 40) {// 按下箭头
       if (isValidIndex && this.state.pointIndex < dataList.length) {
@@ -165,11 +178,14 @@ class AddressSelect extends React.Component {
     } else if (keynum === 13) {// 按回车键
       if (this.state.pointIndex) {// 选择值
         const node = document.getElementById('auto-option-li-' + this.state.pointIndex)
-        const value = node.getAttribute('data-value')
-        const value2 = node.getAttribute('data-value2')
-        const ids = node.getAttribute('data-ids')
-        const label = node.innerHTML
-        this.selectOptionVal({ value, value2, label, ids })
+        const key = node.getAttribute('data-key')
+        let obj = null
+        dataList.map(item => {
+          if (item && key == item[keyField]) {
+            obj = item 
+          }
+        })
+        this.selectOptionVal(obj)
       }
     }
   }
@@ -205,11 +221,25 @@ class AddressSelect extends React.Component {
 
 
   generateLiNode(data = []) {
-    const { pointIndex } = this.state
+    const { labelField, keyField } = this.state
+    if (data.length) {
+      let invalid = false
+      if (!(labelField in data[0])) {
+        console.warn('There is no such attribute '+ labelField +' in the object.')
+        invalid = true
+      }
+      if (!(keyField in data[0])) {
+        console.warn('There is no such attribute '+ keyField +' in the object.')
+        invalid = true
+      }
+      if (invalid) {
+        return null
+      }
+    }
     return data.map((item, index) => {
       let i = index + 1
-      if (item && item.label) {
-        return <li key={`auto-option-li-` + index} id={`auto-option-li-` + i} className={'auto-option-li'} data-value={item.value} data-value2={item.value2} data-ids={item.ids} onClick={this.onOptionClick.bind(this, item)}>{item.label}</li>
+      if (item) {
+        return <li key={`auto-option-li-` + index} id={`auto-option-li-` + i} className={'auto-option-li'} data-key={item[keyField]} onClick={this.onOptionClick.bind(this, item)}>{item[labelField]}</li>
       }
     })
   }
@@ -269,8 +299,10 @@ AddressSelect.propTypes = {
   setValueObj: PropTypes.object,
   onChange: PropTypes.func,
   onSelect: PropTypes.func,
-  direction: PropTypes.string, // 下拉框还是上拉框
+  direction: PropTypes.string,
   placeholder: PropTypes.string,
+  keyField: PropTypes.string,
+  labelField: PropTypes.string,
 }
 
 export default AddressSelect
