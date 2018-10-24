@@ -1,7 +1,7 @@
 {
   "name": "rc-searchselect",
   "version": "2.0.0",
-  "description": "",
+  "description": "This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
