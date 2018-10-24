@@ -4,12 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AddressSelect = require('./rcSearchSelect/AddressSelect');
+var _SearchSelect = require('./rcSearchSelect/SearchSelect');
 
 Object.defineProperty(exports, 'SearchSelect', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_AddressSelect).default;
+    return _interopRequireDefault(_SearchSelect).default;
   }
 });
 
