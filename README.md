@@ -1,12 +1,12 @@
 # rc-searchselect
-![image](https://github.com/ctq123/rcSearchSelect/tree/master/examples/gif/1023.gif)
-![image](https://github.com/ctq123/rcSearchSelect/tree/master/examples/gif/1024.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
 # install
 npm install rc-searchselect --save-dev
 # Usage
 
 ## sample usage
-![image](https://github.com/ctq123/rcSearchSelect/tree/master/examples/gif/1023.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
 ```
 mport React from 'react'
 import { SearchSelect } from 'rc-searchselect'
@@ -61,7 +61,7 @@ class App extends React.Component {
 ```
 
 ## more usage
-![image](https://github.com/ctq123/rcSearchSelect/tree/master/examples/gif/1024.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1024.gif)
 
 ```
 mport React from 'react'
