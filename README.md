@@ -1,6 +1,6 @@
 # rc-searchselect
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
-![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1024.gif)
 # install
 npm install rc-searchselect --save-dev
 # Usage
