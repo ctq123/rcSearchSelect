@@ -48,7 +48,6 @@ class App extends React.Component {
           <SearchSelect
             dataSource={dataList}
             onSelect={this.onSelect.bind(this)}
-            setValueObj={this.state && this.state.obj}
             placeholder="input search text"
             keyField="code"
             labelField="name"
@@ -136,16 +135,16 @@ class App extends React.Component {
   }
 }
 ```
-# attributes
+# Attributes
 
 attributes | description | type | default
 ---|---|---|---
-dataSource | the data source | array | []
+dataSource | the data source, it contains a list of objects | array | []
+keyField | the unique field of the object, Eg id| string | ''
+labelField | the field of the object, which use for search and display| string | ''
+onSelect | the callback function of the option selected | function | (e)=>{}
 defaultValue | the default value | object | undefined
 setValueObj | the value object, use to set value or clear current value. It must contain a field of "id" and unique every time | object | undefined
 onChange | the callback function of the input element change | function | (e)=>{}
-onSelect | the callback function of the option selected | function | (e)=>{}
 direction | the direction of the options, up or down | 'up' or 'down' | 'down'
 placeholder | the placeholder of this component | string | ''
-keyField | the unique field of the object, Eg id| string | ''
-labelField | the field of the object, which use for search and display| string | ''
