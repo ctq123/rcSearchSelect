@@ -24,8 +24,6 @@
   width: 100%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  max-height: 200px;
-  overflow-y: auto;
 }
 
 .rc-searchselect .dropup-parent {
@@ -46,12 +44,10 @@
 
 .rc-searchselect .dropup-parent .dropdown {
   top: auto !important;
-  bottom: 0px !important;
+  bottom: 3px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
 }
 
 .rc-searchselect .dropdwon-placement {
@@ -60,15 +56,7 @@
   color: rgba(0,0,0,.65);
 }
 
-.rc-searchselect .dropdwon-placement > ul { 
-  position: relative;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-}
-
-.rc-searchselect .dropdwon-placement > ul > li{ 
+.rc-searchselect .option-item {
   padding: 5px 12px;
   margin: 0;
   color: #333;
@@ -83,12 +71,8 @@
   background-color: #fff;
 }
 
-.rc-searchselect .dropdwon-placement > ul > li:hover {
+.rc-searchselect .option-item:hover {
   background-color: #e6f7ff;
-}
-
-.rc-searchselect .auto-active-option-li {
-  background-color: #e6f7ff !important;
 }
 
 .rc-searchselect .auto-input {

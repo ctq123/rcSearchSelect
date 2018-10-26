@@ -1,7 +1,9 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ClickOut from './ClickOut'
 import './SearchSelect.css'
+import { AutoSizer, List as VList } from 'react-virtualized'
 
 /**
  * platform: github
@@ -155,20 +157,20 @@ class SearchSelect extends React.Component {
     if (keynum === 40) {// 按下箭头
       if (isValidIndex && this.state.pointIndex < dataList.length) {
         this.state.pointIndex++
-        const blockId = 'auto-option-li-' + this.state.pointIndex
+        const blockId = 'option-item-' + this.state.pointIndex
         this.setActiveOptionStyle(blockId)
         this.setScrollToBlock(blockId)
       }
     } else if (keynum === 38) {// 按上箭头
       if (isValidIndex && this.state.pointIndex > 1) {
         this.state.pointIndex--
-        const blockId = 'auto-option-li-' + this.state.pointIndex
+        const blockId = 'option-item-' + this.state.pointIndex
         this.setActiveOptionStyle(blockId)
         this.setScrollToBlock(blockId)
       }
     } else if (keynum === 13) {// 按回车键
       if (this.state.pointIndex) {// 选择值
-        const node = document.getElementById('auto-option-li-' + this.state.pointIndex)
+        const node = document.getElementById('option-item-' + this.state.pointIndex)
         const key = node.getAttribute('data-key')
         if (!keyField || !(keyField in (dataList[0] || Object))) {
           console.warn('There is no such attribute '+ keyField +' in the object. Press the Enter key selected option failed!')
@@ -186,8 +188,8 @@ class SearchSelect extends React.Component {
   }
 
   setActiveOptionStyle(indexID) {
-    this.setClassBackgroundColor('auto-option-li', '#ffffff')
-    document.getElementById(indexID).style.backgroundColor = '#e6f7ff'
+    this.setClassBackgroundColor('option-item', '#ffffff')
+    document.getElementById(indexID) && (document.getElementById(indexID).style.backgroundColor = '#e6f7ff')
   }
 
   setClassBackgroundColor(className, color) {
@@ -240,7 +242,16 @@ class SearchSelect extends React.Component {
 
   render() {
     const { dataList, inputVal } = this.state
-    const { direction, placeholder } = this.props
+    const { direction, placeholder, keyField, labelField, dropdwonHeight } = this.props
+    const rowH = 28
+    const dropdownH = Math.min(rowH*dataList.length, dropdwonHeight)
+
+    const renderItem = ({ index, key, style }) => {
+      let i = index + 1, item = dataList[index]
+      if (item) {
+        return <div key={key} style={style} className='option-item' id={`option-item-` + i} data-key={item[keyField]} onClick={this.onOptionClick.bind(this, item)}>{item[labelField]}</div>
+      }
+    }
     return (
       <ClickOut onClickOut={this.onBlur.bind(this)}>
         <div className='rc-searchselect'>
@@ -249,8 +260,20 @@ class SearchSelect extends React.Component {
               <div>
                 {
                   dataList && dataList.length ?
-                    <div className='dropdown dropdwon-placement'>
-                      <ul>{this.generateLiNode(dataList)}</ul>
+                    <div className='dropdown dropdwon-placement' style={{height: dropdownH}}>
+                      {
+                        <AutoSizer>
+                          {({ height, width }) => (
+                            <VList
+                              width={width}
+                              height={height}
+                              rowCount={dataList.length}
+                              rowHeight={28}
+                              rowRenderer={renderItem}
+                            />
+                          )}
+                        </AutoSizer>
+                      }
                     </div>
                     :
                     null
@@ -298,6 +321,7 @@ SearchSelect.propTypes = {
   onChange: PropTypes.func,
   direction: PropTypes.string,
   placeholder: PropTypes.string,
+  dropdwonHeight: PropTypes.number
 }
 
 SearchSelect.defaultProps = {
@@ -309,7 +333,8 @@ SearchSelect.defaultProps = {
   setValueObj: null,
   onChange: (e) => {},
   direction: 'down',
-  placeholder: ''
+  placeholder: '',
+  dropdwonHeight: 200
 }
 
 export default SearchSelect

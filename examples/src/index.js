@@ -32,7 +32,7 @@ class App extends React.Component {
       {code: "10", name: 'Gary', age: 22, sex: 'female' }
     ]
     return (
-      <div style={{width: 300}}>
+      <div style={{width: 300, marginTop: 400, marginLeft: 200}}>
         <div>
           <SearchSelect
             dataSource={dataList}
