@@ -11,25 +11,13 @@ import './SearchSelect.css'
 class SearchSelect extends React.Component {
   constructor(props) {
     super(props)
-    const defaultDirection = props.direction ? props.direction : 'down'
-    const defaultPlaceholder = props.placeholder ? props.placeholder : ''
-    const defaultOnChangeCB = props.onChange ? props.onChange : (e) => { }
-    const defaultOnSelectCB = props.onSelect ? props.onSelect : (e) => { }
-    const defaultKey = props.keyField || ''
-    const defaultLabel = props.labelField || ''
-    const defaultValue = props.defaultValue && props.defaultValue[defaultLabel] || ''
+    const defaultValue = props.defaultValue && props.defaultValue[props.labelField] || ''
 
     this.state = {
       dataList: [],
-      direction: defaultDirection,
       pointIndex: 0,
       inputVal: defaultValue,
       isSelected: !!defaultValue,
-      onChangeCB: defaultOnChangeCB,
-      onSelectCB: defaultOnSelectCB,
-      placeholder: defaultPlaceholder,
-      keyField: defaultKey,
-      labelField: defaultLabel
     }
   }
 
@@ -56,7 +44,7 @@ class SearchSelect extends React.Component {
         pointIndex: 0,
         isSelected: false,
       })
-      this.state.onSelectCB(null)
+      this.props.onSelect(null)
     }
   }
 
@@ -79,7 +67,7 @@ class SearchSelect extends React.Component {
             pointIndex: 0,
             dataList: [],
           })
-          this.state.onSelectCB(null)
+          this.props.onSelect(null)
         }
       }
     }
@@ -95,8 +83,7 @@ class SearchSelect extends React.Component {
   }
 
   onChange (e) {
-    const dataSource = this.props.dataSource || []
-    const { onChangeCB } = this.state
+    const { dataSource } = this.props
     const val = e.target.value
     let dataList = []
     if (val) {
@@ -116,7 +103,7 @@ class SearchSelect extends React.Component {
         dataList,
       })
     }
-    onChangeCB(val)
+    this.props.onChange(val)
   }
 
   onOptionClick(item) {
@@ -124,12 +111,12 @@ class SearchSelect extends React.Component {
   }
 
   selectOptionVal(item=null) {
-    const { labelField } = this.state
+    const { labelField } = this.props
     if (item && !(labelField in item)) {
       console.warn('There is no such attribute '+ labelField +' in the object. Selected option failed!')
       return
     }
-    this.state.onSelectCB(item)
+    this.props.onSelect(item)
     const val = item && item[labelField] || ''
     this.setState((prevState, props) => {
       return {
@@ -144,7 +131,7 @@ class SearchSelect extends React.Component {
   filterData(val) {
     const dataSource = this.props.dataSource || []
     let dataList = []
-    const { labelField } = this.state
+    const { labelField } = this.props
     if (dataSource.length && !(labelField in dataSource[0])) {
       console.warn('There is no such attribute '+ labelField +' in the object.')
       return
@@ -162,7 +149,8 @@ class SearchSelect extends React.Component {
     // console.log("handleKeyEvent", e)
     const keynum = e.keyCode || e.which
     // console.log("keynum", keynum)
-    const { dataList, inputVal, keyField } = this.state
+    const { dataList, inputVal } = this.state
+    const { keyField } = this.props
     const isValidIndex = !!(dataList && dataList.length)
     if (keynum === 40) {// 按下箭头
       if (isValidIndex && this.state.pointIndex < dataList.length) {
@@ -226,7 +214,7 @@ class SearchSelect extends React.Component {
 
 
   generateLiNode(data = []) {
-    const { labelField, keyField } = this.state
+    const { labelField, keyField } = this.props
     if (data.length) {
       let invalid = false
       const obj = data[0]
@@ -251,7 +239,8 @@ class SearchSelect extends React.Component {
   }
 
   render() {
-    const { direction, dataList, inputVal, placeholder } = this.state
+    const { dataList, inputVal } = this.state
+    const { direction, placeholder } = this.props
     return (
       <ClickOut onClickOut={this.onBlur.bind(this)}>
         <div className='rc-searchselect'>
@@ -300,15 +289,27 @@ class SearchSelect extends React.Component {
 }
 
 SearchSelect.propTypes = {
-  dataSource: PropTypes.array,
+  dataSource: PropTypes.array.isRequired,
+  keyField: PropTypes.string.isRequired,
+  labelField: PropTypes.string.isRequired,
+  onSelect: PropTypes.func,
   defaultValue: PropTypes.object,
   setValueObj: PropTypes.object,
   onChange: PropTypes.func,
-  onSelect: PropTypes.func,
   direction: PropTypes.string,
   placeholder: PropTypes.string,
-  keyField: PropTypes.string,
-  labelField: PropTypes.string,
+}
+
+SearchSelect.defaultProps = {
+  dataSource: [],
+  keyField: '',
+  labelField: '',
+  onSelect: (e) => {},
+  defaultValue: null,
+  setValueObj: null,
+  onChange: (e) => {},
+  direction: 'down',
+  placeholder: ''
 }
 
 export default SearchSelect

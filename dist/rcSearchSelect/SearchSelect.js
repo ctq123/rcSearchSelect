@@ -43,25 +43,13 @@ var SearchSelect = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchSelect.__proto__ || Object.getPrototypeOf(SearchSelect)).call(this, props));
 
-    var defaultDirection = props.direction ? props.direction : 'down';
-    var defaultPlaceholder = props.placeholder ? props.placeholder : '';
-    var defaultOnChangeCB = props.onChange ? props.onChange : function (e) {};
-    var defaultOnSelectCB = props.onSelect ? props.onSelect : function (e) {};
-    var defaultKey = props.keyField || '';
-    var defaultLabel = props.labelField || '';
-    var defaultValue = props.defaultValue && props.defaultValue[defaultLabel] || '';
+    var defaultValue = props.defaultValue && props.defaultValue[props.labelField] || '';
 
     _this.state = {
       dataList: [],
-      direction: defaultDirection,
       pointIndex: 0,
       inputVal: defaultValue,
-      isSelected: !!defaultValue,
-      onChangeCB: defaultOnChangeCB,
-      onSelectCB: defaultOnSelectCB,
-      placeholder: defaultPlaceholder,
-      keyField: defaultKey,
-      labelField: defaultLabel
+      isSelected: !!defaultValue
     };
     return _this;
   }
@@ -93,7 +81,7 @@ var SearchSelect = function (_React$Component) {
           pointIndex: 0,
           isSelected: false
         });
-        this.state.onSelectCB(null);
+        this.props.onSelect(null);
       }
     }
   }, {
@@ -120,7 +108,7 @@ var SearchSelect = function (_React$Component) {
               pointIndex: 0,
               dataList: []
             });
-            this.state.onSelectCB(null);
+            this.props.onSelect(null);
           }
         }
       }
@@ -138,8 +126,7 @@ var SearchSelect = function (_React$Component) {
   }, {
     key: 'onChange',
     value: function onChange(e) {
-      var dataSource = this.props.dataSource || [];
-      var onChangeCB = this.state.onChangeCB;
+      var dataSource = this.props.dataSource;
 
       var val = e.target.value;
       var dataList = [];
@@ -160,7 +147,7 @@ var SearchSelect = function (_React$Component) {
           dataList: dataList
         });
       }
-      onChangeCB(val);
+      this.props.onChange(val);
     }
   }, {
     key: 'onOptionClick',
@@ -171,13 +158,13 @@ var SearchSelect = function (_React$Component) {
     key: 'selectOptionVal',
     value: function selectOptionVal() {
       var item = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var labelField = this.state.labelField;
+      var labelField = this.props.labelField;
 
       if (item && !(labelField in item)) {
         console.warn('There is no such attribute ' + labelField + ' in the object. Selected option failed!');
         return;
       }
-      this.state.onSelectCB(item);
+      this.props.onSelect(item);
       var val = item && item[labelField] || '';
       this.setState(function (prevState, props) {
         return {
@@ -193,7 +180,7 @@ var SearchSelect = function (_React$Component) {
     value: function filterData(val) {
       var dataSource = this.props.dataSource || [];
       var dataList = [];
-      var labelField = this.state.labelField;
+      var labelField = this.props.labelField;
 
       if (dataSource.length && !(labelField in dataSource[0])) {
         console.warn('There is no such attribute ' + labelField + ' in the object.');
@@ -215,8 +202,8 @@ var SearchSelect = function (_React$Component) {
       // console.log("keynum", keynum)
       var _state2 = this.state,
           dataList = _state2.dataList,
-          inputVal = _state2.inputVal,
-          keyField = _state2.keyField;
+          inputVal = _state2.inputVal;
+      var keyField = this.props.keyField;
 
       var isValidIndex = !!(dataList && dataList.length);
       if (keynum === 40) {
@@ -312,9 +299,9 @@ var SearchSelect = function (_React$Component) {
       var _this2 = this;
 
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var _state3 = this.state,
-          labelField = _state3.labelField,
-          keyField = _state3.keyField;
+      var _props = this.props,
+          labelField = _props.labelField,
+          keyField = _props.keyField;
 
       if (data.length) {
         var invalid = false;
@@ -345,11 +332,12 @@ var SearchSelect = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _state4 = this.state,
-          direction = _state4.direction,
-          dataList = _state4.dataList,
-          inputVal = _state4.inputVal,
-          placeholder = _state4.placeholder;
+      var _state3 = this.state,
+          dataList = _state3.dataList,
+          inputVal = _state3.inputVal;
+      var _props2 = this.props,
+          direction = _props2.direction,
+          placeholder = _props2.placeholder;
 
       return _react2.default.createElement(
         _ClickOut2.default,
@@ -416,15 +404,27 @@ var SearchSelect = function (_React$Component) {
 }(_react2.default.Component);
 
 SearchSelect.propTypes = {
-  dataSource: _propTypes2.default.array,
+  dataSource: _propTypes2.default.array.isRequired,
+  keyField: _propTypes2.default.string.isRequired,
+  labelField: _propTypes2.default.string.isRequired,
+  onSelect: _propTypes2.default.func,
   defaultValue: _propTypes2.default.object,
   setValueObj: _propTypes2.default.object,
   onChange: _propTypes2.default.func,
-  onSelect: _propTypes2.default.func,
   direction: _propTypes2.default.string,
-  placeholder: _propTypes2.default.string,
-  keyField: _propTypes2.default.string,
-  labelField: _propTypes2.default.string
+  placeholder: _propTypes2.default.string
+};
+
+SearchSelect.defaultProps = {
+  dataSource: [],
+  keyField: '',
+  labelField: '',
+  onSelect: function onSelect(e) {},
+  defaultValue: null,
+  setValueObj: null,
+  onChange: function onChange(e) {},
+  direction: 'down',
+  placeholder: ''
 };
 
 exports.default = SearchSelect;
