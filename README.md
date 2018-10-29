@@ -1,8 +1,8 @@
 # rc-searchselect
-This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations.
+This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations.There is also an important feature that introduces react-virtualized component which to solve the problem of rendering jams in millions of data source scenarios.
 
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
-![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1024.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1025.gif)
 # install
 npm install rc-searchselect --save-dev
 # Usage
@@ -62,7 +62,7 @@ class App extends React.Component {
 ```
 
 ## more usage
-![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1024.gif)
+![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1025.gif)
 
 ```
 mport React from 'react'
@@ -83,19 +83,19 @@ class App extends React.Component {
       item
     })
   }
-  
+
   setVal () {
     let label = '广东省广州市天河区'
     console.log('set label>>>', label)
     this.setState({
-      obj: {id: new Date().getTime(), label}
+      obj: {id: Date.now(), label}
     })
   }
 
   clearVal () {
     console.log('clear value')
     this.setState({
-      obj: {id: new Date().getTime(), label: null}
+      obj: {id: Date.now(), label: null}
     })
   }
   
@@ -113,38 +113,39 @@ class App extends React.Component {
       {id: 10, ids: '109,209,3900', value: '浙江省,浙江省,余杭区', name: '浙江省浙江省余杭区',label: '浙江省杭州市余杭区(311100)',zipCOde: '311100'}
     ]
     return (
-      <div style={{width: 300}}>
-        <button onClick={this.setVal.bind(this)}>设定</button>
-        <button onClick={this.clearVal.bind(this)}>重置</button>
-        <br/>
-        <br/>
+      <div style={{width: 300, marginTop: 400, marginLeft: 200}}>
         <div>
           <SearchSelect
             dataSource={dataList}
             onSelect={this.onSelect.bind(this)}
             setValueObj={this.state && this.state.obj}
-            placeholder="请输入省市区"
+            placeholder="input search text"
             keyField="id"
             labelField="label"
+            direction='up'
           />
         </div>
         <br/>
+        <button onClick={this.setVal.bind(this)}>设定</button>
+        <button onClick={this.clearVal.bind(this)}>重置</button>
+        <br />
         <div style={{fontSize: 12, color: '#9E9E9E'}}>选择的数据：{JSON.stringify(this.state.item)}</div>
       </div>
     )
   }
 }
 ```
-# Attributes
+# Prop Types
 
-attributes | description | type | default
----|---|---|---
-dataSource | the data source, it contains a list of objects | array | []
-keyField | the unique field of the object, Eg id| string | ''
-labelField | the field of the object, which use for search and display| string | ''
-onSelect | the callback function of the option selected | function | (e)=>{}
-defaultValue | the default value | object | undefined
-setValueObj | the value object, use to set value or clear current value. It must contain a field of "id" and unique every time | object | undefined
-onChange | the callback function of the input element change | function | (e)=>{}
-direction | the direction of the options, up or down | 'up' or 'down' | 'down'
-placeholder | the placeholder of this component | string | ''
+attributes | description | type | default | isRequire
+---|---|---|---|--
+dataSource | the data source, it contains a list of objects | array | [] | True
+keyField | the unique field of the object, Eg id| string | '' | True
+labelField | the field of the object, which use for search and display| string | '' | True
+onSelect | the callback function of the option selected | function | (e)=>{} | False
+defaultValue | the default value | object | null | False
+setValueObj | the value object, use to set value or clear current value. It must contain a field of "id" and unique every time, another key is "label", Eg {id: Date.now(), label: 'set label data'} | object | null | False
+onChange | the callback function of the input element change | function | (e)=>{} | False
+direction | the direction of the options, up or down | 'up' or 'down' | 'down' | False
+placeholder | the placeholder of this component | string | '' | False
+dropdwonHeight | the height of downdown list | number | 200 | False

@@ -22,6 +22,8 @@ var _ClickOut2 = _interopRequireDefault(_ClickOut);
 
 require('./SearchSelect.css');
 
+var _reactVirtualized = require('react-virtualized');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -117,7 +119,8 @@ var SearchSelect = function (_React$Component) {
     key: 'onFocus',
     value: function onFocus(e) {
       if (!this.state.inputVal) {
-        var dataSource = this.props.dataSource || [];
+        var dataSource = this.props.dataSource;
+
         this.setState({
           dataList: dataSource
         });
@@ -178,7 +181,7 @@ var SearchSelect = function (_React$Component) {
   }, {
     key: 'filterData',
     value: function filterData(val) {
-      var dataSource = this.props.dataSource || [];
+      var dataSource = this.props.dataSource;
       var dataList = [];
       var labelField = this.props.labelField;
 
@@ -210,7 +213,7 @@ var SearchSelect = function (_React$Component) {
         // 按下箭头
         if (isValidIndex && this.state.pointIndex < dataList.length) {
           this.state.pointIndex++;
-          var blockId = 'auto-option-li-' + this.state.pointIndex;
+          var blockId = 'option-item-' + this.state.pointIndex;
           this.setActiveOptionStyle(blockId);
           this.setScrollToBlock(blockId);
         }
@@ -218,7 +221,7 @@ var SearchSelect = function (_React$Component) {
         // 按上箭头
         if (isValidIndex && this.state.pointIndex > 1) {
           this.state.pointIndex--;
-          var _blockId = 'auto-option-li-' + this.state.pointIndex;
+          var _blockId = 'option-item-' + this.state.pointIndex;
           this.setActiveOptionStyle(_blockId);
           this.setScrollToBlock(_blockId);
         }
@@ -226,7 +229,7 @@ var SearchSelect = function (_React$Component) {
         // 按回车键
         if (this.state.pointIndex) {
           // 选择值
-          var node = document.getElementById('auto-option-li-' + this.state.pointIndex);
+          var node = document.getElementById('option-item-' + this.state.pointIndex);
           var key = node.getAttribute('data-key');
           if (!keyField || !(keyField in (dataList[0] || Object))) {
             console.warn('There is no such attribute ' + keyField + ' in the object. Press the Enter key selected option failed!');
@@ -245,8 +248,8 @@ var SearchSelect = function (_React$Component) {
   }, {
     key: 'setActiveOptionStyle',
     value: function setActiveOptionStyle(indexID) {
-      this.setClassBackgroundColor('auto-option-li', '#ffffff');
-      document.getElementById(indexID).style.backgroundColor = '#e6f7ff';
+      this.setClassBackgroundColor('option-item', '#ffffff');
+      document.getElementById(indexID) && (document.getElementById(indexID).style.backgroundColor = '#e6f7ff');
     }
   }, {
     key: 'setClassBackgroundColor',
@@ -332,13 +335,36 @@ var SearchSelect = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       var _state3 = this.state,
           dataList = _state3.dataList,
           inputVal = _state3.inputVal;
       var _props2 = this.props,
           direction = _props2.direction,
-          placeholder = _props2.placeholder;
+          placeholder = _props2.placeholder,
+          keyField = _props2.keyField,
+          labelField = _props2.labelField,
+          dropdwonHeight = _props2.dropdwonHeight;
 
+      var rowH = 28;
+      var dropdownH = Math.min(rowH * dataList.length, dropdwonHeight);
+
+      var renderItem = function renderItem(_ref) {
+        var index = _ref.index,
+            key = _ref.key,
+            style = _ref.style;
+
+        var i = index + 1,
+            item = dataList[index];
+        if (item) {
+          return _react2.default.createElement(
+            'div',
+            { key: key, style: style, className: 'option-item', id: 'option-item-' + i, 'data-key': item[keyField], onClick: _this3.onOptionClick.bind(_this3, item) },
+            item[labelField]
+          );
+        }
+      };
       return _react2.default.createElement(
         _ClickOut2.default,
         { onClickOut: this.onBlur.bind(this) },
@@ -356,11 +382,21 @@ var SearchSelect = function (_React$Component) {
                 null,
                 dataList && dataList.length ? _react2.default.createElement(
                   'div',
-                  { className: 'dropdown dropdwon-placement' },
+                  { className: 'dropdown dropdwon-placement', style: { height: dropdownH } },
                   _react2.default.createElement(
-                    'ul',
+                    _reactVirtualized.AutoSizer,
                     null,
-                    this.generateLiNode(dataList)
+                    function (_ref2) {
+                      var height = _ref2.height,
+                          width = _ref2.width;
+                      return _react2.default.createElement(_reactVirtualized.List, {
+                        width: width,
+                        height: height,
+                        rowCount: dataList.length,
+                        rowHeight: 28,
+                        rowRenderer: renderItem
+                      });
+                    }
                   )
                 ) : null
               )
@@ -412,7 +448,8 @@ SearchSelect.propTypes = {
   setValueObj: _propTypes2.default.object,
   onChange: _propTypes2.default.func,
   direction: _propTypes2.default.string,
-  placeholder: _propTypes2.default.string
+  placeholder: _propTypes2.default.string,
+  dropdwonHeight: _propTypes2.default.number
 };
 
 SearchSelect.defaultProps = {
@@ -424,7 +461,8 @@ SearchSelect.defaultProps = {
   setValueObj: null,
   onChange: function onChange(e) {},
   direction: 'down',
-  placeholder: ''
+  placeholder: '',
+  dropdwonHeight: 200
 };
 
 exports.default = SearchSelect;

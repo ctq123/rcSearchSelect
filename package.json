@@ -1,12 +1,12 @@
 {
   "name": "rc-searchselect",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
-    "transpile": "babel src -d dist --copy-files"
+    "prepublish": "babel src -d dist --copy-files"
   },
   "repository": {
     "type": "git",

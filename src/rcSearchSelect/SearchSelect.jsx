@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import ClickOut from './ClickOut'
 import './SearchSelect.css'
@@ -77,7 +76,7 @@ class SearchSelect extends React.Component {
 
   onFocus (e) {
     if (!this.state.inputVal) {
-      const dataSource = this.props.dataSource || []
+      const { dataSource } = this.props
       this.setState({
         dataList: dataSource
       })
@@ -131,7 +130,7 @@ class SearchSelect extends React.Component {
   }
 
   filterData(val) {
-    const dataSource = this.props.dataSource || []
+    const dataSource = this.props.dataSource
     let dataList = []
     const { labelField } = this.props
     if (dataSource.length && !(labelField in dataSource[0])) {
