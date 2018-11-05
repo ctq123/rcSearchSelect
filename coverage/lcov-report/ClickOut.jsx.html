@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ClickOut.jsx</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="prettify.css" />
+    <link rel="stylesheet" href="base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="index.html">All files</a> ClickOut.jsx
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.82% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>7/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">8.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28.57% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">35% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>7/20</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
+import ReactDOM from 'react-dom'
+&nbsp;
+/**
+ * platform: github
+ * author: xbchencn
+ * date: 2018-07-11
+ */
+class ClickOutComponent extends React.Component {
+  componentDidMount () {
+    let self = this
+    let el = ReactDOM.findDOMNode(this)
+    this.__el = el
+&nbsp;
+    self.__documentClicked = <span class="fstat-no" title="function not covered" >fu</span>nction (e) {
+<span class="cstat-no" title="statement not covered" >      if ((e.__clickedElements || []).indexOf(el) &gt; -1) <span class="cstat-no" title="statement not covered" >return</span></span>
+&nbsp;
+      let clickOutHandler = <span class="cstat-no" title="statement not covered" >self.props.onClickOut</span>
+<span class="cstat-no" title="statement not covered" >      if (!clickOutHandler) {</span>
+<span class="cstat-no" title="statement not covered" >        return console.warn('onClickOut is not defined.')</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      clickOutHandler.call(self, e)</span>
+    }
+&nbsp;
+    self.__elementClicked = <span class="fstat-no" title="function not covered" >fu</span>nction (e) {
+<span class="cstat-no" title="statement not covered" >      e.__clickedElements = e.__clickedElements || []</span>
+<span class="cstat-no" title="statement not covered" >      e.__clickedElements.push(el)</span>
+    }
+&nbsp;
+    setTimeout(<span class="fstat-no" title="function not covered" >fu</span>nction () {
+<span class="cstat-no" title="statement not covered" >      if (self.__unmounted) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >      self.toggleListeners('addEventListener')</span>
+    }, 0)
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>mponentWillUnmount () {
+<span class="cstat-no" title="statement not covered" >    this.toggleListeners('removeEventListener')</span>
+<span class="cstat-no" title="statement not covered" >    this.__unmounted = true</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  to</span>ggleListeners (listenerMethod) {
+<span class="cstat-no" title="statement not covered" >    this.__el[listenerMethod]('click', this.__elementClicked, false)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    document[listenerMethod]('click', this.__documentClicked, false)</span>
+  }
+&nbsp;
+  render () {
+    return (
+      Array.isArray(this.props.children)
+        ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;div&gt;{this.props.children}&lt;/div&gt;</span>
+        : React.Children.only(this.props.children)
+    )
+  }
+}
+&nbsp;
+export default ClickOutComponent
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Nov 05 2018 11:09:02 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>

@@ -4,9 +4,23 @@
   "description": "This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations.There is also an important feature that introduces react-virtualized component which to solve the problem of rendering jams in millions of data source scenarios.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "coverage": "jest --coverage",
     "start": "webpack-dev-server --mode development",
     "prepublish": "babel src -d dist --copy-files"
+  },
+  "jest": {
+    "setupFiles": [
+      "./tests/setup.js"
+    ],
+    "collectCoverageFrom": [
+      "**/src/rcSearchSelect/**"
+    ],
+    "collectCoverage": true,
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest",
+      "^.+\\.css$": "./tests/css-transform.js"
+    }
   },
   "repository": {
     "type": "git",
@@ -31,11 +45,15 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
+    "babel-jest": "23.6.0",
     "babel-loader": "7.1.5",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
     "css-loader": "1.0.0",
+    "enzyme": "3.1.0",
+    "enzyme-adapter-react-16": "1.0.2",
     "html-webpack-plugin": "3.2.0",
+    "jest": "21.2.1",
     "react": "16.6.0",
     "react-dom": "16.6.0",
     "react-virtualized": "9.21.0",

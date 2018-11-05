@@ -1,6 +1,15 @@
 # rc-searchselect
 This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations.There is also an important feature that introduces react-virtualized component which to solve the problem of rendering jams in millions of data source scenarios.
 
+这是一个React搜索选择控件，支持复杂数据选择回调，选择的数据是一个对象，并且这个对象是用户自定义的，同时支持设值和清空操作。还有一个重要的特性，引入react-virtualized控件，解决上百万数据源场景下渲染卡顿问题。
+
+## React SearchSelect
+[![Build Status](https://travis-ci.org/ctq123/rcSearchSelect.svg?branch=master&foo=bar)](https://travis-ci.org/ctq123/rcSearchSelect)
+[![NPM version](https://img.shields.io/npm/v/rcSearchSelect.js.svg?style=flat)](https://www.npmjs.com/package/rc-searchselect)
+[![codecov](https://codecov.io/gh/ctq123/rcSearchSelect/branch/master/graph/badge.svg)](https://codecov.io/gh/ctq123/rcSearchSelect)
+![platform](https://img.shields.io/cocoapods/p/rcSearchSelect.svg?style=flat)
+
+## Demo
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1025.gif)
 # install
