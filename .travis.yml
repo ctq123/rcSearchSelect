@@ -7,10 +7,10 @@ notifications:
   - chengtianqing123@sina.cn
 
 node_js:
-  - node
+  - "4"
 
 install:
-  - npm install -g codecov
+  - npm install -g codecov jest 
 
 script:
   - npm run coverage
