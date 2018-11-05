@@ -7,7 +7,6 @@ This is a React search selection control that supports complex data selection ca
 [![Build Status](https://travis-ci.org/ctq123/rcSearchSelect.svg?branch=master&foo=bar)](https://travis-ci.org/ctq123/rcSearchSelect)
 [![NPM version](https://img.shields.io/npm/v/rcSearchSelect.svg?style=flat)](https://www.npmjs.com/package/rc-searchselect)
 [![codecov](https://codecov.io/gh/ctq123/rcSearchSelect/branch/master/graph/badge.svg)](https://codecov.io/gh/ctq123/rcSearchSelect)
-![platform](https://img.shields.io/cocoapods/p/rcSearchSelect.svg?style=flat)
 
 ## Demo
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
