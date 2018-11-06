@@ -168,7 +168,7 @@ var SearchSelect = function (_React$Component) {
         return;
       }
       this.props.onSelect(item);
-      var val = item && item[labelField] || '';
+      var val = item && item[labelField];
       this.setState(function (prevState, props) {
         return {
           inputVal: val,
@@ -181,7 +181,10 @@ var SearchSelect = function (_React$Component) {
   }, {
     key: 'filterData',
     value: function filterData(val) {
-      var dataSource = this.props.dataSource;
+      var _props = this.props,
+          dataSource = _props.dataSource,
+          isSensitiveCase = _props.isSensitiveCase;
+
       var dataList = [];
       var labelField = this.props.labelField;
 
@@ -190,9 +193,17 @@ var SearchSelect = function (_React$Component) {
         return;
       }
       dataSource.map(function (item) {
-        var label = item && item[labelField] || '';
-        if (label.toString().indexOf(val) > -1) {
-          dataList.push(item);
+        var label = item[labelField] !== 0 ? item[labelField] || '' : 0;
+        if (isSensitiveCase) {
+          if (label.toString().indexOf(val) > -1) {
+            dataList.push(item);
+          }
+        } else {
+          var label2 = label.toString().toUpperCase();
+          var val2 = (val || '').toString().toUpperCase();
+          if (label2.indexOf(val2) > -1) {
+            dataList.push(item);
+          }
         }
       });
       return dataList;
@@ -230,7 +241,7 @@ var SearchSelect = function (_React$Component) {
         if (this.state.pointIndex) {
           // 选择值
           var node = document.getElementById('option-item-' + this.state.pointIndex);
-          var key = node.getAttribute('data-key');
+          var key = node && node.getAttribute('data-key');
           if (!keyField || !(keyField in (dataList[0] || Object))) {
             console.warn('There is no such attribute ' + keyField + ' in the object. Press the Enter key selected option failed!');
             return;
@@ -302,9 +313,9 @@ var SearchSelect = function (_React$Component) {
       var _this2 = this;
 
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-      var _props = this.props,
-          labelField = _props.labelField,
-          keyField = _props.keyField;
+      var _props2 = this.props,
+          labelField = _props2.labelField,
+          keyField = _props2.keyField;
 
       if (data.length) {
         var invalid = false;
@@ -340,12 +351,12 @@ var SearchSelect = function (_React$Component) {
       var _state3 = this.state,
           dataList = _state3.dataList,
           inputVal = _state3.inputVal;
-      var _props2 = this.props,
-          direction = _props2.direction,
-          placeholder = _props2.placeholder,
-          keyField = _props2.keyField,
-          labelField = _props2.labelField,
-          dropdwonHeight = _props2.dropdwonHeight;
+      var _props3 = this.props,
+          direction = _props3.direction,
+          placeholder = _props3.placeholder,
+          keyField = _props3.keyField,
+          labelField = _props3.labelField,
+          dropdwonHeight = _props3.dropdwonHeight;
 
       var rowH = 28;
       var dropdownH = Math.min(rowH * dataList.length, dropdwonHeight);
@@ -449,7 +460,8 @@ SearchSelect.propTypes = {
   onChange: _propTypes2.default.func,
   direction: _propTypes2.default.string,
   placeholder: _propTypes2.default.string,
-  dropdwonHeight: _propTypes2.default.number
+  dropdwonHeight: _propTypes2.default.number,
+  isSensitiveCase: _propTypes2.default.bool
 };
 
 SearchSelect.defaultProps = {
@@ -462,7 +474,8 @@ SearchSelect.defaultProps = {
   onChange: function onChange(e) {},
   direction: 'down',
   placeholder: '',
-  dropdwonHeight: 200
+  dropdwonHeight: 200,
+  isSensitiveCase: true
 };
 
 exports.default = SearchSelect;

@@ -157,3 +157,4 @@ onChange | the callback function of the input element change | function | (e)=>{
 direction | the direction of the options, up or down | 'up' or 'down' | 'down' | False
 placeholder | the placeholder of this component | string | '' | False
 dropdwonHeight | the height of downdown list | number | 200 | False
+isSensitiveCase | judge search text is case sensitive if the search texts  are letter | bool | True | False

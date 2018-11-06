@@ -18,7 +18,7 @@ describe('SelectSelect unitTest',  ()=> {
     expect(wrapper.state().inputVal).toBe('Carry')
   })
 
-  it('placehoder', () => {
+  it('set placehoder', () => {
     const placeholder = 'input text'
     const wrapper = shallow(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' placeholder={placeholder} />)
     const inputNode = wrapper.find('input')
@@ -38,11 +38,35 @@ describe('SelectSelect unitTest',  ()=> {
   })
 
   it('set direction', () => {
-    const wrapper = shallow(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
+    const wrapper = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
     expect(wrapper.find('.dropdown-parent').length).toEqual(1)
 
     wrapper.setProps({ direction: 'up' })
     expect(wrapper.find('.dropup-parent').length).toEqual(1)
+  })
+
+  it('default isSensitiveCase', () => {
+    const wrapper = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
+
+    expect(wrapper.props().isSensitiveCase).toEqual(true)
+    wrapper.find('input').simulate('focus')
+    wrapper.find('input').simulate('change', { target: { value: 'Alan' } })
+    wrapper.find('input').simulate('keydown', { keyCode: 40 })
+    wrapper.find('input').simulate('keydown', { keyCode: 13 })
+    expect(wrapper.find('input').prop('value')).toEqual(null) // 无法通过document.getElementById获取对应的值
+  })
+
+  it('set isSensitiveCase', () => {
+    const wrapper = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
+
+    expect(wrapper.props().isSensitiveCase).toEqual(true)
+
+    wrapper.setProps({ isSensitiveCase: false })
+    wrapper.find('input').simulate('focus')
+    wrapper.find('input').simulate('change', { target: { value: 'Alan' } })
+    wrapper.find('input').simulate('keydown', { keyCode: 40 })
+    wrapper.find('input').simulate('keydown', { keyCode: 13 })
+    expect(wrapper.find('input').prop('value')).toBeNull() // 无法通过document.getElementById获取对应的值
   })
 
 
@@ -67,10 +91,12 @@ describe('SelectSelect unitTest',  ()=> {
   })
 
   it('set inputValue when user input text', () => {
-    const wrapperM = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
-    wrapperM.find('input').simulate('focus')
-    wrapperM.find('input').simulate('change', { target: { value: 'Car' } })
-    expect(wrapperM.find('input').prop('value')).toEqual('Car')
+    const wrapper = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
+    wrapper.find('input').simulate('focus')
+    wrapper.find('input').simulate('change', { target: { value: 'Car' } })
+    wrapper.find('input').simulate('keydown', { keyCode: 38 })
+    wrapper.find('input').simulate('keydown', { keyCode: 13 })
+    expect(wrapper.find('input').prop('value')).toEqual('Car')
   })
 
 })

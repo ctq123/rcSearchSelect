@@ -118,7 +118,7 @@ class SearchSelect extends React.Component {
       return
     }
     this.props.onSelect(item)
-    const val = item && item[labelField] || ''
+    const val = item && item[labelField]
     this.setState((prevState, props) => {
       return {
         inputVal: val,
@@ -130,7 +130,7 @@ class SearchSelect extends React.Component {
   }
 
   filterData(val) {
-    const dataSource = this.props.dataSource
+    const { dataSource, isSensitiveCase } = this.props
     let dataList = []
     const { labelField } = this.props
     if (dataSource.length && !(labelField in dataSource[0])) {
@@ -138,9 +138,17 @@ class SearchSelect extends React.Component {
       return
     }
     dataSource.map(item => {
-      const label = item && item[labelField] || ''
-      if (label.toString().indexOf(val) > -1) {
-        dataList.push(item)
+      const label = item[labelField] !== 0 ? (item[labelField] || '') : 0
+      if (isSensitiveCase) {
+        if (label.toString().indexOf(val) > -1) {
+          dataList.push(item)
+        }
+      } else {
+        const label2 = label.toString().toUpperCase()
+        const val2 = (val || '').toString().toUpperCase()
+        if (label2.indexOf(val2) > -1) {
+          dataList.push(item)
+        }
       }
     })
     return dataList
@@ -170,7 +178,7 @@ class SearchSelect extends React.Component {
     } else if (keynum === 13) {// 按回车键
       if (this.state.pointIndex) {// 选择值
         const node = document.getElementById('option-item-' + this.state.pointIndex)
-        const key = node.getAttribute('data-key')
+        const key = node && node.getAttribute('data-key')
         if (!keyField || !(keyField in (dataList[0] || Object))) {
           console.warn('There is no such attribute '+ keyField +' in the object. Press the Enter key selected option failed!')
           return
@@ -320,7 +328,8 @@ SearchSelect.propTypes = {
   onChange: PropTypes.func,
   direction: PropTypes.string,
   placeholder: PropTypes.string,
-  dropdwonHeight: PropTypes.number
+  dropdwonHeight: PropTypes.number,
+  isSensitiveCase: PropTypes.bool
 }
 
 SearchSelect.defaultProps = {
@@ -333,7 +342,8 @@ SearchSelect.defaultProps = {
   onChange: (e) => {},
   direction: 'down',
   placeholder: '',
-  dropdwonHeight: 200
+  dropdwonHeight: 200,
+  isSensitiveCase: true,
 }
 
 export default SearchSelect
