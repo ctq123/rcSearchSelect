@@ -1,11 +1,10 @@
 # rc-searchselect
-This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations.There is also an important feature that introduces react-virtualized component which to solve the problem of rendering jams in millions of data source scenarios.
 
 这是一个React搜索选择控件，支持复杂数据选择回调，选择的数据是一个对象，并且这个对象是用户自定义的，同时支持设值和清空操作。还有一个重要的特性，引入react-virtualized控件，解决上百万数据源场景下渲染卡顿问题。
 
 ## React SearchSelect
 [![Build Status](https://travis-ci.org/ctq123/rcSearchSelect.svg?branch=master&foo=bar)](https://travis-ci.org/ctq123/rcSearchSelect)
-[![NPM version](https://img.shields.io/badge/npm-v5.7.1-green.svg?style=flat)](https://www.npmjs.com/package/rc-searchselect)
+[![NPM version](https://img.shields.io/badge/npm-v5.7.1-green.svg??style=flat)](https://www.npmjs.com/package/rc-searchselect)
 [![codecov](https://codecov.io/gh/ctq123/rcSearchSelect/branch/master/graph/badge.svg)](https://codecov.io/gh/ctq123/rcSearchSelect)
 
 ## Demo
@@ -145,16 +144,16 @@ class App extends React.Component {
 ```
 # Prop Types
 
-attributes | description | type | default | isRequire
+属性 | 描述 | 类型 | 默认值 | 是否必填
 ---|---|---|---|--
-dataSource | the data source, it contains a list of objects | array | [] | True
-keyField | the unique field of the object, Eg id| string | '' | True
-labelField | the field of the object, which use for search and display| string | '' | True
-onSelect | the callback function of the option selected | function | (e)=>{} | False
-defaultValue | the default value | object | null | False
-setValueObj | the value object, use to set value or clear current value. It must contain a field of "id" and unique every time, another key is "label", Eg {id: Date.now(), label: 'set label data'} | object | null | False
-onChange | the callback function of the input element change | function | (e)=>{} | False
-direction | the direction of the options, up or down | 'up' or 'down' | 'down' | False
-placeholder | the placeholder of this component | string | '' | False
-dropdwonHeight | the height of downdown list | number | 200 | False
-isSensitiveCase | judge search text is case sensitive if the search texts  are letter | bool | True | False
+dataSource | 数据源，数组类型 | array | [] | 是
+keyField | 数据源对象唯一标志字段，例如ID | string | '' | 是
+labelField | 数据源对象字段，选择下拉框显示的字段 | string | '' | 是
+onSelect | 选择回调函数 | function | (e)=>{} | 否
+defaultValue | 默认值 | object | null | 否
+setValueObj | 设置值对象，用于设置或者清空操作，必须包含{id, label}两个字段，只有当id改变时当前操作（设值或清空）才会生效，id最好设置为时间戳，如清空操作{id: Date.now(), label: '' } | object | null | 否
+onChange | 输入框变化回调函数 | function | (e)=>{} | 否
+direction | 下拉框的显示位置方向，输入框的上面或下面 | ['up','down'] | 'down' | 否
+placeholder | 输入选择框默认显示文字 | string | '' | 否
+dropdwonHeight | 下拉列表最大的高度 | number | 200 | 否
+isSensitiveCase | 搜索字母时是否区分大小写 | bool | True | 否

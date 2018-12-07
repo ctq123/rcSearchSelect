@@ -326,7 +326,7 @@ SearchSelect.propTypes = {
   defaultValue: PropTypes.object,
   setValueObj: PropTypes.object,
   onChange: PropTypes.func,
-  direction: PropTypes.string,
+  direction: PropTypes.oneOf(['down', 'up']),
   placeholder: PropTypes.string,
   dropdwonHeight: PropTypes.number,
   isSensitiveCase: PropTypes.bool
