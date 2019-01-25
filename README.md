@@ -1,4 +1,4 @@
-# English | [简体中文](./README-zh_CN.md) 
+## English | [简体中文](./README-zh_CN.md) 
 
 # rc-searchselect
 
@@ -154,7 +154,7 @@ dataSource | the data source | array | [] | Y
 keyField | the data source object unique field，e.g ID | string | '' | Y
 labelField | the data source object field, the displayed field in the drop-down box | string | '' | Y
 onSelect | the selected callback function | function | (e)=>{} | N
-defaultValue | 默认值 | object | null | N
+defaultValue | default value | object | null | N
 setValueObj | set the value object, used to set or clear the operation, must contain {id, label} two fields, only the current operation (set value or empty) will take effect when the id changes, id is best set to timestamp, e.g the clear operation {id: Date.now(), label: '' } | object | null | N
 onChange | the input box change callback function | function | (e)=>{} | N
 direction | the display position of the drop-down box, above or below the input box | enum['up','down'] | 'down' | N
