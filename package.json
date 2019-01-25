@@ -1,6 +1,6 @@
 {
   "name": "rc-searchselect",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -31,8 +31,6 @@
     "searchselect",
     "search",
     "select",
-    "React",
-    "object",
     "react-virtualized",
     "virtualized-list"
   ],

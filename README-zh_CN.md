@@ -1,24 +1,24 @@
-# English | [简体中文](./README-zh_CN.md) 
+# [English](./README.md) | 简体中文
 
 # rc-searchselect
 
-This is a React search selection control that supports complex data selection callbacks. The selected data is an object, and this object is user-defined and supports setting and emptying operations. There is also an important feature that introduces a react-virtualized control that solves the problem of rendering jams in millions of data source scenarios.
+这是一个React搜索选择控件，支持复杂数据选择回调，选择的数据是一个对象，并且这个对象是用户自定义的，同时支持设值和清空操作。还有一个重要的特性，引入react-virtualized控件，解决上百万数据源场景下渲染卡顿问题。
 
 ## React SearchSelect
 [![Build Status](https://travis-ci.org/ctq123/rcSearchSelect.svg?branch=master&foo=bar)](https://travis-ci.org/ctq123/rcSearchSelect)
 [![NPM version](https://img.shields.io/badge/npm-v5.7.1-green.svg??style=flat)](https://www.npmjs.com/package/rc-searchselect)
 [![codecov](https://codecov.io/gh/ctq123/rcSearchSelect/branch/master/graph/badge.svg)](https://codecov.io/gh/ctq123/rcSearchSelect)
 
-## Demo
+## demo效果
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1025.gif)
 
-# install
+# 安装
 npm install rc-searchselect --save-dev
 
-# Usage
+# 使用
 
-## sample usage
+## 简单例子
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1023.gif)
 ```
 mport React from 'react'
@@ -72,7 +72,7 @@ class App extends React.Component {
 }
 ```
 
-## more usage
+## 其他例子
 ![image](https://github.com/ctq123/rcSearchSelect/blob/master/examples/gif/1025.gif)
 
 ```
@@ -148,16 +148,16 @@ class App extends React.Component {
 ```
 # Prop Types
 
-props | description | type | default | isRequire
+属性 | 描述 | 类型 | 默认值 | 是否必填
 ---|---|---|---|--
-dataSource | the data source | array | [] | Y
-keyField | the data source object unique field，e.g ID | string | '' | Y
-labelField | the data source object field, the displayed field in the drop-down box | string | '' | Y
-onSelect | the selected callback function | function | (e)=>{} | N
-defaultValue | 默认值 | object | null | N
-setValueObj | set the value object, used to set or clear the operation, must contain {id, label} two fields, only the current operation (set value or empty) will take effect when the id changes, id is best set to timestamp, e.g the clear operation {id: Date.now(), label: '' } | object | null | N
-onChange | the input box change callback function | function | (e)=>{} | N
-direction | the display position of the drop-down box, above or below the input box | enum['up','down'] | 'down' | N
-placeholder | the placeholder of the component | string | '' | N
-dropdwonHeight | the maximum height of the drop-down list | number | 200 | N
-isSensitiveCase | is it case sensitive when searching for letters | bool | True | N
+dataSource | 数据源，数组类型 | array | [] | 是
+keyField | 数据源对象唯一标志字段，例如ID | string | '' | 是
+labelField | 数据源对象字段，选择下拉框显示的字段 | string | '' | 是
+onSelect | 选择回调函数 | function | (e)=>{} | 否
+defaultValue | 默认值 | object | null | 否
+setValueObj | 设置值对象，用于设置或者清空操作，必须包含{id, label}两个字段，只有当id改变时当前操作（设值或清空）才会生效，id最好设置为时间戳，如清空操作{id: Date.now(), label: '' } | object | null | 否
+onChange | 输入框变化回调函数 | function | (e)=>{} | 否
+direction | 下拉框的显示位置方向，输入框的上面或下面 | ['up','down'] | 'down' | 否
+placeholder | 输入选择框默认显示文字 | string | '' | 否
+dropdwonHeight | 下拉列表最大的高度 | number | 200 | 否
+isSensitiveCase | 搜索字母时是否区分大小写 | bool | True | 否
