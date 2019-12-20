@@ -48,6 +48,7 @@ var SearchSelect = function (_PureComponent) {
     var defaultValue = props.defaultValue && props.defaultValue[props.labelField] || '';
 
     _this.state = {
+      id: '',
       dataList: [],
       pointIndex: 0,
       inputVal: defaultValue,
@@ -58,13 +59,14 @@ var SearchSelect = function (_PureComponent) {
 
   _createClass(SearchSelect, [{
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps) {
-      var setValueObj = prevProps.setValueObj;
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.id !== this.state.id) {
+        var _ref = this.props.setValueObj || {},
+            id = _ref.id,
+            label = _ref.label;
 
-      if (setValueObj && setValueObj.id && setValueObj.id !== this.setID) {
-        this.setID = setValueObj.id;
-        if (setValueObj.label) {
-          var dataList = this.filterData(setValueObj.label);
+        if (label) {
+          var dataList = this.filterData(label);
           if (dataList && dataList.length) {
             this.selectOptionVal(dataList[0]);
           }
@@ -344,44 +346,81 @@ var SearchSelect = function (_PureComponent) {
       });
     }
   }, {
-    key: 'render',
-    value: function render() {
+    key: 'getRenderItem',
+    value: function getRenderItem(_ref2) {
       var _this3 = this;
 
+      var index = _ref2.index,
+          key = _ref2.key,
+          style = _ref2.style;
       var _state3 = this.state,
           dataList = _state3.dataList,
           inputVal = _state3.inputVal;
       var _props3 = this.props,
-          direction = _props3.direction,
-          placeholder = _props3.placeholder,
           keyField = _props3.keyField,
-          labelField = _props3.labelField,
-          dropdwonHeight = _props3.dropdwonHeight;
+          labelField = _props3.labelField;
+
+      var i = index + 1,
+          item = dataList[index];
+      if (item) {
+        var liNode = item[labelField];
+        if (inputVal) {
+          var arr = liNode.toString().split(inputVal);
+          liNode = arr.map(function (item2, index) {
+            if (index === arr.length - 1) {
+              return _react2.default.createElement(
+                'span',
+                null,
+                item2
+              );
+            } else {
+              return _react2.default.createElement(
+                'span',
+                null,
+                item2,
+                _react2.default.createElement(
+                  'span',
+                  { className: 'active' },
+                  inputVal
+                )
+              );
+            }
+          });
+        }
+
+        return _react2.default.createElement(
+          'div',
+          {
+            key: key,
+            style: style,
+            className: 'option-item',
+            id: 'option-item-' + i,
+            'data-key': item[keyField],
+            onClick: function onClick(e) {
+              return _this3.onOptionClick(item);
+            } },
+          liNode
+        );
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
+
+      var _state4 = this.state,
+          dataList = _state4.dataList,
+          inputVal = _state4.inputVal;
+      var _props4 = this.props,
+          direction = _props4.direction,
+          placeholder = _props4.placeholder,
+          keyField = _props4.keyField,
+          labelField = _props4.labelField,
+          dropdwonHeight = _props4.dropdwonHeight;
 
       var rowH = 28;
       var dropdownH = Math.min(rowH * dataList.length, dropdwonHeight);
 
-      var renderItem = function renderItem(_ref) {
-        var index = _ref.index,
-            key = _ref.key,
-            style = _ref.style;
-
-        var i = index + 1,
-            item = dataList[index];
-        if (item) {
-          return _react2.default.createElement(
-            'div',
-            {
-              key: key,
-              style: style,
-              className: 'option-item',
-              id: 'option-item-' + i,
-              'data-key': item[keyField],
-              onClick: _this3.onOptionClick.bind(_this3, item) },
-            item[labelField]
-          );
-        }
-      };
       return _react2.default.createElement(
         _ClickOut2.default,
         { onClickOut: this.onBlur.bind(this) },
@@ -403,15 +442,17 @@ var SearchSelect = function (_PureComponent) {
                   _react2.default.createElement(
                     _reactVirtualized.AutoSizer,
                     null,
-                    function (_ref2) {
-                      var height = _ref2.height,
-                          width = _ref2.width;
+                    function (_ref3) {
+                      var height = _ref3.height,
+                          width = _ref3.width;
                       return _react2.default.createElement(_reactVirtualized.List, {
                         width: width,
                         height: height,
                         rowCount: dataList.length,
                         rowHeight: 28,
-                        rowRenderer: renderItem
+                        rowRenderer: function rowRenderer(obj) {
+                          return _this4.getRenderItem(obj);
+                        }
                       });
                     }
                   )
@@ -450,6 +491,20 @@ var SearchSelect = function (_PureComponent) {
           )
         )
       );
+    }
+  }], [{
+    key: 'getDerivedStateFromProps',
+    value: function getDerivedStateFromProps(props, state) {
+      var _ref4 = props.setValueObj || {},
+          _ref4$id = _ref4.id,
+          id = _ref4$id === undefined ? '' : _ref4$id;
+
+      if (state.id !== id) {
+        return {
+          id: id
+        };
+      }
+      return null;
     }
   }]);
 
