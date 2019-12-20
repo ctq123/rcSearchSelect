@@ -90,6 +90,15 @@ describe('SelectSelect unitTest',  ()=> {
     expect(wrapper.state().inputVal).toBe('Carry')
   })
 
+  it('set inputValue when user input null', () => {
+    const wrapper = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
+    wrapper.find('input').simulate('focus')
+    wrapper.find('input').simulate('change', { target: { value: '' } })
+    wrapper.find('input').simulate('keydown', { keyCode: 38 })
+    wrapper.find('input').simulate('keydown', { keyCode: 13 })
+    expect(wrapper.find('input').prop('value')).toEqual('')
+  })
+
   it('set inputValue when user input text', () => {
     const wrapper = mount(<SearchSelect dataSource={dataSource} keyField='id' labelField='name' />)
     wrapper.find('input').simulate('focus')

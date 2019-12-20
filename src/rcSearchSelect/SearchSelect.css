@@ -95,6 +95,10 @@
   line-height: 1.5;
 }
 
+.rc-searchselect .active {
+  color: #1890ff;
+}
+
 .rc-searchselect .rc-input {
   position: static;
   padding: 4px 11px;

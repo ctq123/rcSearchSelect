@@ -21,7 +21,24 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  devtool: 'source-map',
+  stats: {
+    entrypoints: false,
+    children: false,
+    modules: false,
+    errors: true,
+    errorDetails: true,
+    warnings: true
+  },
   devServer: {
-    port: 3001
+    stats: {
+      assets: false,
+      entrypoints: false,
+      children: false,
+      modules: false,
+      errors: true,
+      errorDetails: true,
+      warnings: true
+    }
   }
 }

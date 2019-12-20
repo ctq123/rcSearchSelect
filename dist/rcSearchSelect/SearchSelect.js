@@ -37,8 +37,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * author: ctq123
  * date: 2018-10-22
  */
-var SearchSelect = function (_React$Component) {
-  _inherits(SearchSelect, _React$Component);
+var SearchSelect = function (_PureComponent) {
+  _inherits(SearchSelect, _PureComponent);
 
   function SearchSelect(props) {
     _classCallCheck(this, SearchSelect);
@@ -57,9 +57,9 @@ var SearchSelect = function (_React$Component) {
   }
 
   _createClass(SearchSelect, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var setValueObj = nextProps.setValueObj;
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps) {
+      var setValueObj = prevProps.setValueObj;
 
       if (setValueObj && setValueObj.id && setValueObj.id !== this.setID) {
         this.setID = setValueObj.id;
@@ -371,7 +371,13 @@ var SearchSelect = function (_React$Component) {
         if (item) {
           return _react2.default.createElement(
             'div',
-            { key: key, style: style, className: 'option-item', id: 'option-item-' + i, 'data-key': item[keyField], onClick: _this3.onOptionClick.bind(_this3, item) },
+            {
+              key: key,
+              style: style,
+              className: 'option-item',
+              id: 'option-item-' + i,
+              'data-key': item[keyField],
+              onClick: _this3.onOptionClick.bind(_this3, item) },
             item[labelField]
           );
         }
@@ -448,7 +454,7 @@ var SearchSelect = function (_React$Component) {
   }]);
 
   return SearchSelect;
-}(_react2.default.Component);
+}(_react.PureComponent);
 
 SearchSelect.propTypes = {
   dataSource: _propTypes2.default.array.isRequired,

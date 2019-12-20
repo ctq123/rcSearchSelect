@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ClickOut from './ClickOut'
 import './SearchSelect.css'
@@ -9,12 +9,13 @@ import { AutoSizer, List as VList } from 'react-virtualized'
  * author: ctq123
  * date: 2018-10-22
  */
-class SearchSelect extends React.Component {
+class SearchSelect extends PureComponent {
   constructor(props) {
     super(props)
     const defaultValue = props.defaultValue && props.defaultValue[props.labelField] || ''
 
     this.state = {
+      id: '',
       dataList: [],
       pointIndex: 0,
       inputVal: defaultValue,
@@ -22,12 +23,21 @@ class SearchSelect extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { setValueObj } = nextProps
-    if (setValueObj && setValueObj.id && setValueObj.id !== this.setID) {
-      this.setID = setValueObj.id
-      if (setValueObj.label) {
-        let dataList = this.filterData(setValueObj.label)
+  static getDerivedStateFromProps(props, state) {
+    const { id='' } = props.setValueObj || {}
+    if (state.id !== id) {
+      return {
+        id
+      }
+    }
+    return null
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.id !== this.state.id) {
+      const { id, label } = this.props.setValueObj || {}
+      if (label) {
+        let dataList = this.filterData(label)
         if (dataList && dataList.length) {
           this.selectOptionVal(dataList[0])
         }
@@ -247,18 +257,42 @@ class SearchSelect extends React.Component {
     })
   }
 
+  getRenderItem({ index, key, style }) {
+    const { dataList, inputVal } = this.state
+    const { keyField, labelField } = this.props
+    let i = index + 1, item = dataList[index]
+    if (item) {
+      let liNode = item[labelField]
+      if (inputVal) {
+        const arr = liNode.toString().split(inputVal)
+        liNode = arr.map((item2, index) => {
+          if (index === (arr.length - 1)) {
+            return <span>{item2}</span>
+          } else {
+            return <span>{item2}<span className='active'>{ inputVal }</span></span>
+          }
+        })
+      }
+
+      return (
+      <div 
+        key={key} 
+        style={style} 
+        className='option-item' 
+        id={`option-item-` + i} 
+        data-key={item[keyField]} 
+        onClick={e => this.onOptionClick(item)}>
+        { liNode }
+      </div>)
+    }
+  }
+
   render() {
     const { dataList, inputVal } = this.state
     const { direction, placeholder, keyField, labelField, dropdwonHeight } = this.props
     const rowH = 28
     const dropdownH = Math.min(rowH*dataList.length, dropdwonHeight)
 
-    const renderItem = ({ index, key, style }) => {
-      let i = index + 1, item = dataList[index]
-      if (item) {
-        return <div key={key} style={style} className='option-item' id={`option-item-` + i} data-key={item[keyField]} onClick={this.onOptionClick.bind(this, item)}>{item[labelField]}</div>
-      }
-    }
     return (
       <ClickOut onClickOut={this.onBlur.bind(this)}>
         <div className='rc-searchselect'>
@@ -276,7 +310,7 @@ class SearchSelect extends React.Component {
                               height={height}
                               rowCount={dataList.length}
                               rowHeight={28}
-                              rowRenderer={renderItem}
+                              rowRenderer={obj => this.getRenderItem(obj)}
                             />
                           )}
                         </AutoSizer>
