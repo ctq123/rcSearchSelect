@@ -267,9 +267,9 @@ class SearchSelect extends PureComponent {
         const arr = liNode.toString().split(inputVal)
         liNode = arr.map((item2, index) => {
           if (index === (arr.length - 1)) {
-            return <span>{item2}</span>
+            return <span key={index}>{item2}</span>
           } else {
-            return <span>{item2}<span className='active'>{ inputVal }</span></span>
+            return <span key={index}>{item2}<span className='active'>{ inputVal }</span></span>
           }
         })
       }

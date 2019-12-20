@@ -370,13 +370,13 @@ var SearchSelect = function (_PureComponent) {
             if (index === arr.length - 1) {
               return _react2.default.createElement(
                 'span',
-                null,
+                { key: index },
                 item2
               );
             } else {
               return _react2.default.createElement(
                 'span',
-                null,
+                { key: index },
                 item2,
                 _react2.default.createElement(
                   'span',
